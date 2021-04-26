@@ -1,55 +1,71 @@
+/** @format */
 
-import React, { useState , useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
- const WeatherApp = () => {
+const WeatherApp = () => {
+  const [weather, setWeather] = useState("");
+  const [city, setCity] = useState("London");
 
-    const [temprature,setTemprature]=useState("");
-    const [city,setCity]=useState("London");
-    const[country,setCountry]=useState("uk");
+  const weatherData = async () => {
+    try {
+      const response = await axios.get(
+        "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb370b1fdbe3b6b0965324cccfeb99e3"
+      );
 
-    const weatherData= async () => {
-        try {
-          const response = await axios.get('http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb370b1fdbe3b6b0965324cccfeb99e3');
-          setTemprature(response)
-          console.log( response);
-        } catch (error) {
-          console.error(error.message);
-        }
-       
-      };
+      setWeather(response);
+      console.log(weather);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
-      useEffect(()=>{
-          weatherData()
-      },[])
+  useEffect(() => {
+    weatherData();
+  }, []);
 
-    return (
-        
-        <div>
+  return (
+    <div>
+      <div className="search-form">
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Enter your cityname"
+        />
+        <button type="button" onClick={() => weatherData()}>
+          {" "}
+          Search{" "}
+        </button>
+      </div>
 
-            <div className="search-form">
-                <input type="text" placeholder="Enter your cityname"/>
-                <button type="button"> Search </button>  
-            </div>  
+      {weather !== null ? (
+        <div className="main-contanier">
+          <h4>Live Weather Condition</h4>
+          <div className="weather-icon">
+            <img
+              src={`http://openweathermap.org/img/w/${weather.data.weather[0].icon}.png`}
+              alt="imigicon"
+            />
+          </div>
 
-            <div className="main-contanier">
+          <h3>{weather.data.weather[0].main}</h3>
 
-              <h4>Live Weather Condition</h4> 
-              <div className="weather-icon">
-                <i className="fa fa-sun"></i>  
-              </div> 
+          <div className="temprature">
+            <h1>
+              {parseFloat(weather.data.main.temp - 273.15).toFixed(1)}&deg;C
+            </h1>
+          </div>
 
-              <h3>Sunny</h3>
-              <div className="temprature">
-                  <h1>25&deg;C</h1>
-              </div>
-              <div className="location">
-                  <h3><i className="fa fa-street-view"></i> Usak | Turkey </h3>
-
-              </div>
-                
-            </div>      
+          <div className="location">
+            <h3>
+              <i className="fa fa-street-view"></i> {weather.data.name} |{" "}
+              {weather.sys.country}
+            </h3>
+          </div>
         </div>
-    )
-}
+      ) : null}
+    </div>
+  );
+};
 export default WeatherApp;
