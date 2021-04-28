@@ -5,7 +5,7 @@ import './App.css';
 import Form from './components/Form';
 import Titles from './components/Titles';
 import axios from 'axios';
-/* import WeatherApp from "./contanier/WeatherApp";  */
+/* import WeatherApp from "./components/WeatherApp";  */
 
 function App() {
   const weatherData = async (city) => {
