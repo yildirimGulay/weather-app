@@ -1,2 +1,0 @@
-(this["webpackJsonpweather-app"]=this["webpackJsonpweather-app"]||[]).push([[0],{11:function(e,t,n){"use strict";n.r(t);var c=n(1),r=n.n(c),s=n(3),a=n.n(s),i=(n(8),n(9),n(0));var p=function(){return Object(i.jsx)("div",{className:"App",children:Object(i.jsx)("p",{children:"hello"})})};a.a.render(Object(i.jsx)(r.a.StrictMode,{children:Object(i.jsx)(p,{})}),document.getElementById("root"))},8:function(e,t,n){},9:function(e,t,n){}},[[11,1,2]]]);
-//# sourceMappingURL=main.37d05ea6.chunk.js.map
