@@ -1,30 +1,29 @@
 import React, { useState } from 'react';
 
-function Form({ weatherData }) {
-  const [city, setCity] = useState(' ');
+function Form({ setQuery }) {
+  const [term, setTerm] = useState('');
 
-  const formSubmit = (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
-    weatherData(city);
-  };
 
-  console.log(`city`, city);
+    setQuery(term);
+  };
+  console.log(`form term`, term);
+  console.log();
 
   return (
-    <>
-      <form onSubmit={formSubmit} className="search-form">
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Enter your cityname"
-        />
-        <button type="button" onClick={() => weatherData()}>
-          {' '}
-          Search{' '}
-        </button>
-      </form>
-    </>
+    <form onSubmit={handleClick} className="search-form">
+      <input
+        type="text"
+        value={term}
+        onChange={(e) => setTerm(e.target.value)}
+        placeholder="Enter your cityname"
+      />
+      <button type="button" onClick={handleClick}>
+        {' '}
+        Search{' '}
+      </button>
+    </form>
   );
 }
 

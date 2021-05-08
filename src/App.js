@@ -1,42 +1,31 @@
 /** @format */
 
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Form from './components/Form';
+import { useSearch } from './hooks/useSearch';
+import WeatherApp from './components/WeatherApp';
 import Titles from './components/Titles';
-import axios from 'axios';
-/* import WeatherApp from "./components/WeatherApp";  */
 
 function App() {
-  const weatherData = async (city) => {
-    try {
-      const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cb370b1fdbe3b6b0965324cccfeb99e3`
-      );
+  const [query, setQuery] = useState('London');
 
-      console.log(response);
-      console.log('api city:', city);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  const search = useSearch(query);
 
-  useEffect(() => {
-    weatherData();
-  }, []);
-  console.log(weatherData);
   return (
-    <>
-      <div className="App">
-        <div className="card">
-          <Titles />
+    <div className="App">
+      <Titles />
 
-          <Form weatherData={weatherData} />
+      <Form setQuery={setQuery} />
 
-          {/* <WeatherApp getWeather={weatherData} /> */}
-        </div>
-      </div>
-    </>
+      <WeatherApp
+        city={search.city}
+        icon={`http://openweathermap.org/img/w/${search.icon}.png`}
+        country={search.country}
+        temp={search.temp}
+        main={search.main}
+      />
+    </div>
   );
 }
 
