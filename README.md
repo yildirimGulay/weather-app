@@ -23,6 +23,11 @@
 `&deg` for C sembol
 
 
+  Aded index html <head> :
+  " <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> " to http request show on github pages
+
+
+
 
 
 
