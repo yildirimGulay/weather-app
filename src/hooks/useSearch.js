@@ -9,11 +9,14 @@ export const useSearch = (query) => {
   const [country, setCountry] = useState('');
   const [city, setCity] = useState('');
 
+
+  const apiKey= "cb370b1fdbe3b6b0965324cccfeb99e3";
+
   useEffect(() => {
     try {
       (async () => {
         const response = await axios.get(
-          `http://api.openweathermap.org/data/2.5/weather?q=${query}&mode=json&units=metric&APPID=cb370b1fdbe3b6b0965324cccfeb99e3`
+          `http://api.openweathermap.org/data/2.5/weather?q=${query}&mode=json&units=metric&APPID=${apiKey}`
         );
         setWeather(response.data);
         setMain(response.data.weather[0].main);
