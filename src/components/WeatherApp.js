@@ -1,4 +1,3 @@
-/** @format */
 
 import React from 'react';
 
@@ -10,7 +9,7 @@ const WeatherApp = (props) => {
         <div className="weather-icon">
           <img
             style={{ width: 150, height: 150 }}
-            src={props.icon}
+            src={`http://openweathermap.org/img/w/${props.icon}.png`}
             alt="icon"
           />
         </div>

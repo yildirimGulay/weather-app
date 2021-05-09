@@ -20,7 +20,7 @@ function App() {
 
       <WeatherApp
         city={search.city}
-        icon={`http://openweathermap.org/img/w/${search.icon}.png`}
+        icon={search.icon}
         country={search.country}
         temp={search.temp}
         main={search.main}
