@@ -1,30 +1,32 @@
 /** @format */
 
 import React, { useState } from 'react';
-import './App.css';
 import Form from './components/Form';
-import { useSearch } from './hooks/useSearch';
+import { useWeather } from './hooks/useWeather';
 import WeatherApp from './components/WeatherApp';
 import Titles from './components/Titles';
+
+
 
 function App() {
   const [query, setQuery] = useState('London');
 
-  const search = useSearch(query);
+  const { description, temp, icon, country, city} = useWeather(query);
+ 
 
   return (
-    <div className="App">
+    <div  className="App">
       <Titles />
 
       <Form setQuery={setQuery} />
 
-      <WeatherApp
-        city={search.city}
-        icon={search.icon}
-        country={search.country}
-        temp={search.temp}
-        main={search.main}
-      />
+       <WeatherApp
+        city={city}
+        icon={icon}
+        country={country}
+        temp={temp}
+        description={description}
+      /> 
     </div>
   );
 }

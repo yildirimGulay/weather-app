@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+/** @format */
+
+import React, { useState, useEffect } from "react";
 
 function Form({ setQuery }) {
-  const [term, setTerm] = useState('');
+  const [term, setTerm] = useState("");
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
+
+  console.log('term:',term );
+  console.log('debounce:', debouncedTerm);
+  
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 2000);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [term]);
 
   const handleClick = (e) => {
     e.preventDefault();
 
-    setQuery(term);
+    setQuery(debouncedTerm);
   };
-  console.log(`form term`, term);
-  console.log();
 
   return (
     <form onSubmit={handleClick} className="search-form">
@@ -20,8 +33,8 @@ function Form({ setQuery }) {
         placeholder="Enter your cityname"
       />
       <button type="button" onClick={handleClick}>
-        {' '}
-        Search{' '}
+        {" "}
+        Search{" "}
       </button>
     </form>
   );

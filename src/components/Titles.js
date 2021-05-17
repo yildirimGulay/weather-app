@@ -2,6 +2,7 @@
 import React from 'react';
 
 const Titles = () => {
+  //name prpsa cevir
   return (
     <>
       <div className="card"></div>
