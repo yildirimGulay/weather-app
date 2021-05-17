@@ -16,7 +16,8 @@ function App() {
 
   return (
     <div  className="App">
-      <Titles />
+      <Titles 
+      name={"Weather App"}/>
 
       <Form setQuery={setQuery} />
 
